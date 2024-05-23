@@ -4,12 +4,14 @@ import 'package:intl/intl.dart';
 
 const uuid = Uuid();
 final formatDate = DateFormat.yMd();
- final List<IconData> listIcon = [
-    Icons.food_bank_rounded,
-    Icons.cast_for_education,
-    Icons.airplanemode_active_rounded,
-    Icons.airline_seat_flat_angled_outlined,
-  ];
+
+final List<IconData> listIcon = [
+  Icons.food_bank_rounded,
+  Icons.cast_for_education,
+  Icons.airplanemode_active_rounded,
+  Icons.airline_seat_flat_angled_outlined,
+];
+
 enum Category { food, travel, leisure, work }
 
 class Expense {
@@ -18,7 +20,6 @@ class Expense {
   final double amount;
   final DateTime date;
   final Category category;
-
 
   Expense({
     required this.title,

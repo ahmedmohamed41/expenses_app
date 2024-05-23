@@ -1,5 +1,6 @@
 import 'package:expenses_app/models/expense_model.dart';
 import 'package:flutter/material.dart';
+
 class ExpenseItem extends StatelessWidget {
   ExpenseItem({super.key, required this.item, required this.icon});
   final Expense item;
@@ -16,9 +17,12 @@ class ExpenseItem extends StatelessWidget {
       child: Column(
         children: [
           Text(item.title),
+          SizedBox(
+            height: 10,
+          ),
           Row(
             children: [
-              Text("\$${item.amount.toString()}"),
+              Text("\$ ${item.amount.toString()}"),
               const Spacer(),
               Icon(icon),
               Text(item.formattedDate(item.date)),

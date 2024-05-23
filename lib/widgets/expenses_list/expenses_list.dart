@@ -10,10 +10,11 @@ class ExpensesList extends StatelessWidget {
     return ListView.builder(
       itemCount: listExpense.length,
       itemBuilder: (context, index) => Center(
-          child: ExpenseItem(
-        item: listExpense[index],
-        icon: listIcon[index],
-      )),
+        child: ExpenseItem(
+          item: listExpense[index],
+          icon: listIcon[index],
+        ),
+      ),
     );
   }
 }

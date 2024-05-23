@@ -1,15 +1,18 @@
 import 'package:expenses_app/models/expense_model.dart';
 import 'package:expenses_app/widgets/expenses_list/expenses_list.dart';
+import 'package:expenses_app/widgets/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
-class Expenses extends StatefulWidget {
-  const Expenses({super.key});
+class HomeExpenses extends StatefulWidget {
+  const HomeExpenses({super.key});
 
   @override
-  State<Expenses> createState() => _ExpensesState();
+  State<HomeExpenses> createState() => _HomeExpensesState();
 }
 
-class _ExpensesState extends State<Expenses> {
+class _HomeExpensesState extends State<HomeExpenses> {
+
+
   final List<Expense> _listExpense = [
     Expense(
         title: 'Breakfast',
@@ -37,8 +40,21 @@ class _ExpensesState extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('....'),
+        title: const Text('Expenses'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                useSafeArea: true,
+                isScrollControlled: true,
+                context: context,
+                builder: (ese) => ShowBottomSheetWidget(),
+              );
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -52,3 +68,5 @@ class _ExpensesState extends State<Expenses> {
     );
   }
 }
+
+

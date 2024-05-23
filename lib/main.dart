@@ -1,4 +1,4 @@
-import 'package:expenses_app/widgets/expenses.dart';
+import 'package:expenses_app/widgets/home_Expenses.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
       ),
-      home: const Expenses(),
+      home: const HomeExpenses(),
     );
   }
 }
