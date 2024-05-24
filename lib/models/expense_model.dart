@@ -12,6 +12,10 @@ final List<IconData> listIcon = [
   Icons.airline_seat_flat_angled_outlined,
 ];
 
+void addIcon() {
+  listIcon.add(Icons.food_bank_rounded);
+}
+
 enum Category { food, travel, leisure, work }
 
 class Expense {

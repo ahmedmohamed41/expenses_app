@@ -11,8 +11,6 @@ class HomeExpenses extends StatefulWidget {
 }
 
 class _HomeExpensesState extends State<HomeExpenses> {
-
-
   final List<Expense> _listExpense = [
     Expense(
         title: 'Breakfast',
@@ -29,12 +27,18 @@ class _HomeExpensesState extends State<HomeExpenses> {
         amount: 40.5,
         date: DateTime.now(),
         category: Category.travel),
-    Expense(
-        title: 'swamming',
-        amount: 15.0,
-        date: DateTime.now(),
-        category: Category.leisure),
   ];
+  void addExpense(Expense expense) {
+    setState(() {
+      _listExpense.add(expense);
+    });
+  }
+
+  void removeExpense(Expense expense) {
+    setState(() {
+      _listExpense.remove(expense);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,9 @@ class _HomeExpensesState extends State<HomeExpenses> {
                 useSafeArea: true,
                 isScrollControlled: true,
                 context: context,
-                builder: (ese) => ShowBottomSheetWidget(),
+                builder: (ese) => ShowBottomSheetWidget(
+                  addExpenseToSheet: addExpense,
+                ),
               );
             },
             icon: Icon(Icons.add),
@@ -61,12 +67,15 @@ class _HomeExpensesState extends State<HomeExpenses> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('...'),
-            Expanded(child: ExpensesList(listExpense: _listExpense)),
+            Expanded(
+              child: ExpensesList(
+                listExpense: _listExpense,
+                removeExpenseToSheet: removeExpense,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-

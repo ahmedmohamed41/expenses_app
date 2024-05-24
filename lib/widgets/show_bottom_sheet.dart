@@ -1,4 +1,5 @@
 import 'package:expenses_app/models/expense_model.dart';
+import 'package:expenses_app/widgets/custom_elevated_button.dart';
 import 'package:expenses_app/widgets/custom_from_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -6,8 +7,9 @@ import 'package:intl/intl.dart';
 class ShowBottomSheetWidget extends StatefulWidget {
   ShowBottomSheetWidget({
     super.key,
+    required this.addExpenseToSheet,
   });
-
+  final void Function(Expense expense) addExpenseToSheet;
   @override
   State<ShowBottomSheetWidget> createState() => _ShowBottomSheetWidgetState();
 }
@@ -114,45 +116,30 @@ class _ShowBottomSheetWidgetState extends State<ShowBottomSheetWidget> {
                     }).toList(),
                   ),
                   Spacer(),
-                  ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
-
-                        // const snackBar = SnackBar(content: Text('Error'));
-                        //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (ctx) => AlertDialog(
-                        //     title: Text('Error'),
-                        //     content: Text('No Data enter'),
-                        //     actions: [
-                        //       TextButton(
-                        //         onPressed: () {
-                        //           Navigator.pop(ctx);
-                        //         },
-                        //         child: Text('OK'),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // );
-                      },
-                      child: Text(
-                        'SaveExpense',
-                        style: TextStyle(
-                          color: Colors.deepPurple,
-                        ),
-                      )),
+                  CustomElevatedButton(
+                    onPressed: () {
+                      final double? douConvert =
+                          double.tryParse(_amountController.text);
+                      if (_formKey.currentState!.validate()) {}
+                      setState(() {
+                        widget.addExpenseToSheet(Expense(
+                          title: _titleController.text,
+                          amount: douConvert!,
+                          date: _selectedDate!,
+                          category: _dropdownValue,
+                        ));
+                        addIcon();
+                        Navigator.pop(context);
+                      });
+                    },
+                    text: 'SaveExpense',
+                  ),
                   Spacer(),
-                  ElevatedButton(
+                  CustomElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: Colors.deepPurple,
-                      ),
-                    ),
+                    text: 'Cancel',
                   ),
                 ],
               ),
@@ -163,3 +150,4 @@ class _ShowBottomSheetWidgetState extends State<ShowBottomSheetWidget> {
     );
   }
 }
+
